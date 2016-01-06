@@ -5,6 +5,7 @@
 -export([qsort/1]).
 -export([create_person/2]).
 -export([filter/2]).
+-export([subst/4]).
 
 -record(person, {name = "person name", age = 0}).
 
@@ -51,4 +52,15 @@ catcher(N) ->
 
 
 
+subst(_, _, _, []) ->
+  [];
+subst(New, A1, A2, Lat) ->
+case hd(Lat) of
+  A1 ->
+    [New|tl(Lat)];
+  A2 ->
+    [New|tl(Lat)];
+  _ ->
+    [hd(Lat)|subst(New, A1, A2, tl(Lat))]
+end.
 
